@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ngrx-system",
+  "deleteDestPath": false,
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "@ngrx/effects",
+    "@ngrx/entity",
+    "@ngrx/store",
+    "@ngrx/store-devtools",
+    "ngrx-store-localstorage"
+  ]
+}
