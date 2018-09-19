@@ -1,27 +1,29 @@
-# NgrxSystemProj
+# Ngrx-system
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+This package compiles common packages of ngrx into one and supplies aditional helpers
 
-## Development server
+## interfaces
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- TypedAction<TPayload>: Add a typed payload to Action
+- ReqOb<TIn, TSucc, TError>: Object with action creators for async/request handling.
 
-## Code scaffolding
+## decorators
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- ReqEffect(ReqOb): receives a ReqObject and creates a common handling operation
 
-## Build
+## type helpers
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- createActionType
+- createActionTypeReq
+- createActionTypeSucc
+- createActionTypeErr
 
-## Running unit tests
+## Namespacing action types helper
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+createNamespace(namespace): receives a namespace and supplies three helper methods for it
 
-## Running end-to-end tests
+- createAction (type): creates a namespaced action
+- createEmptyReq(type): creates a ReqOb with an empty TIn
+- createRequest(type): creates a ReqOb with a typed TIn
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+All the action creators supplied by this helper overwrites the toString method in the function. This method returns the Action.type associated to it
