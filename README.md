@@ -27,3 +27,10 @@ createNamespace(namespace): receives a namespace and supplies three helper metho
 - createRequest(type): creates a ReqOb with a typed TIn
 
 All the action creators supplied by this helper overwrites the toString method in the function. This method returns the Action.type associated to it
+
+## metaReducers included
+
+- localStorage (ngrx-storage-localstorage)
+- errorTracing: it will capture the errors for you a give the actions given the number of actions. + initial & last state & Error
+- logger: logging made easy
+- hardReset: will flush your app state entirely

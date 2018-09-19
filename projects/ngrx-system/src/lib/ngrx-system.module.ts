@@ -1,21 +1,15 @@
-import {
-  NgModule,
-  ModuleWithProviders,
-  ErrorHandler,
-  Inject,
-  Optional,
-} from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { defaultConfig } from './config';
 import { NgrxSystemConfig } from './models';
 import { NgrxSystemService } from './ngrx-system.service';
-import { metaReducers } from './storeConfig/system.metareducers';
+import { metaReducers as defaultMetaReducers } from './storeConfig/system.metareducers';
 import { StoreDevtoolsModule } from './ngrx-platform/modules/store-devtools';
 import { StoreModule, StoreRootModule } from './ngrx-platform/modules/store';
 import { EffectsModule } from './ngrx-platform/modules/effects';
 import { EffectsRootModule } from './ngrx-platform/modules/effects/src/effects_root_module';
 
 @NgModule({
-  imports: [StoreRootModule, EffectsRootModule],
+  imports: [StoreRootModule, EffectsRootModule]
 })
 export class NgrxSystemRootModule {
   constructor(private systemService: NgrxSystemService) {}
@@ -25,21 +19,22 @@ export class NgrxSystemRootModule {
 export class NgrxSystemModule {
   static forRoot<T>(
     config: NgrxSystemConfig<T> = defaultConfig,
+    metaReducers = defaultMetaReducers
   ): ModuleWithProviders {
     const devtoolsModule = StoreDevtoolsModule.instrument(config.devTools);
     const effectsModule = EffectsModule.forRoot(config.effects);
     const storeModule = StoreModule.forRoot(config.rootReducers, {
       initialState: config.initialState,
-      metaReducers: metaReducers(config),
+      metaReducers: metaReducers.map(mr => mr(config))
     });
     return {
       providers: [
         ...(storeModule.providers ? storeModule.providers : []),
         ...(effectsModule.providers ? effectsModule.providers : []),
         ...(devtoolsModule.providers ? devtoolsModule.providers : []),
-        NgrxSystemService,
+        NgrxSystemService
       ],
-      ngModule: NgrxSystemRootModule,
+      ngModule: NgrxSystemRootModule
     };
   }
 }

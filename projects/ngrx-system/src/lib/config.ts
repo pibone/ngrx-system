@@ -3,16 +3,20 @@ import { NgrxSystemConfig } from './models';
 export const defaultConfig: NgrxSystemConfig<any> = {
   maxAge: 5,
   log: true,
+  logTrace: true,
   controlledErrors: true,
   simpleRecovery: false,
   send: {
-    enabled: false,
+    enabled: false
   },
   devTools: {
-    maxAge: 30,
+    maxAge: 30
   },
   // TODO: to type
   effects: [],
   rootReducers: {},
   initialState: {},
+  storage: {
+    keys: []
+  }
 };

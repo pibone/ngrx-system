@@ -1,8 +1,20 @@
 import { StoreDevtoolsOptions } from './ngrx-platform/modules/store-devtools';
+import { LocalStorageConfig } from 'ngrx-store-localstorage';
+import { Action } from './ngrx-platform/modules/store';
+
+export interface TraceData {
+  initState: any;
+  state: any;
+  actions: Action[];
+  error: Error;
+  max: number;
+}
 
 export interface NgrxSystemConfig<T> {
-  maxAge: number;
   log: boolean;
+  maxAge: number;
+  logTrace: boolean;
+  submitTrace?: (trace: TraceData) => void;
   controlledErrors: boolean;
   simpleRecovery: boolean;
   send: {
@@ -12,4 +24,5 @@ export interface NgrxSystemConfig<T> {
   rootReducers: any;
   effects: any[];
   initialState: T;
+  storage: LocalStorageConfig;
 }

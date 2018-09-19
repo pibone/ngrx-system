@@ -1,5 +1,4 @@
 import { localStorageSync } from 'ngrx-store-localstorage';
-export const localStorageMeta = localStorageSync({
-  keys: [{ auth: ['token', 'username'] }, 'lang'],
-  rehydrate: true,
-});
+import { NgrxSystemConfig } from '../../models';
+export const localStorageMeta = (config: NgrxSystemConfig<any>) =>
+  localStorageSync(config.storage);

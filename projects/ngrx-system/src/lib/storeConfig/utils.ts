@@ -1,4 +1,5 @@
 import { SYSTEM_EXCEPTION } from './system.actions';
+import { TraceData } from '../models';
 
 export const addActionToActions = (actions, maxActions) => action => {
   if (actions.length >= maxActions) {
@@ -19,14 +20,14 @@ export const addStateToPastStates = (pastStates, maxStates) => state => {
 };
 
 export const createTraceOf = (pastStates, actions, max) => (
-  error: Error | undefined = undefined,
-) =>
+  error: Error | undefined = undefined
+): Promise<TraceData> =>
   Promise.resolve({
     initState: pastStates[0],
     state: pastStates[pastStates.length - 1],
-    actions,
+    actions: [...actions],
     error,
-    max,
+    max
   });
 
 export const logTrace = trace => {

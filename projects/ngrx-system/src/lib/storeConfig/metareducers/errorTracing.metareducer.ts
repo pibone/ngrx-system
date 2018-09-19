@@ -3,10 +3,11 @@ import {
   addActionToActions,
   addStateToPastStates,
   createTraceOf,
-  logTrace,
+  logTrace
 } from '../utils';
+import { NgrxSystemConfig } from '../../models';
 
-export const errorTracingMeta = tracingConfig => reducer => {
+export const errorTracingMeta = (tracingConfig: NgrxSystemConfig<any>) => reducer => {
   const maxActions = tracingConfig.maxAge;
   const pastStates = [];
   const actions = [];
@@ -17,8 +18,11 @@ export const errorTracingMeta = tracingConfig => reducer => {
   const doTracing = () => {
     const x = 1;
     createTrace().then(trace => {
-      if (tracingConfig.log) {
+      if (tracingConfig.logTrace) {
         logTrace(trace);
+      }
+      if (tracingConfig.submitTrace) {
+        tracingConfig.submitTrace(trace);
       }
     });
   };
