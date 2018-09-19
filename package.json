@@ -1,5 +1,6 @@
 {
   "name": "ngrx-system-proj",
+  "license": "MIT",
   "author": {
     "name": "Daniel Peña Iglesias",
     "url": "https://github.com/pibone"
